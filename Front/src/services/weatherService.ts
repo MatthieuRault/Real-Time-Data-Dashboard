@@ -1,12 +1,11 @@
 import axios from "axios";
-
-const weatherApi = axios.create({
-  baseURL: "http://localhost:3000/api/weather",
-});
+import { API_CONFIG } from "../config/api.config.ts";
 
 export const getWeatherByCity = async (city) => {
   try {
-    const response = await weatherApi.get(`/${city}`);
+    const response = await axios.get(
+      `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.WEATHER}/${city}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching weather data:", error);
