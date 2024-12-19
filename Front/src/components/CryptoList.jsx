@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { getCryptoList } from "../services/cryptoService";
+import Modal from "./Modal";
+import CryptoCard from "./CryptoCard";
+import CryptoDetails from "./CryptoDetails";
 
 const CryptoList = () => {
   const [cryptos, setCryptos] = useState([]);
+  const [selectedCryptoId, setSelectedCryptoId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -22,26 +27,31 @@ const CryptoList = () => {
     fetchCryptos();
   }, []);
 
-  return (
-    <div className="bg-white p-4 rounded-md shadow">
-      <h2 className="text-lg font-bold mb-4">
-        Les 10 Cryptomonnaies les plus populaires du moment
-      </h2>
+  const handleCryptoClick = (id) => {
+    setSelectedCryptoId(id);
+    setIsModalOpen(true);
+  };
 
-      {loading && <p>Chargement des cryptomonnaies, merci de patienter...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+  if (loading) return <p>Chargement des cryptomonnaies...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
+
+  return (
+    <div className="p-4">
+      <h2 className="text-lg font-bold mb-4">Top 10 Cryptomonnaies</h2>
 
       <div className="space-y-4">
         {cryptos.map((crypto) => (
-          <div key={crypto.id} className="border p-4 rounded">
-            <h3 className="font-bold">
-              Cryptomonnaie : {crypto.name} ({crypto.symbol})
-            </h3>
-            <p>Prix actuel : {crypto.current_price} €</p>
-            <p>Variation sur 24h : {crypto.price_change_24h}%</p>
-          </div>
+          <CryptoCard
+            key={crypto.id}
+            crypto={crypto}
+            onClick={() => handleCryptoClick(crypto.id)}
+          />
         ))}
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        {selectedCryptoId && <CryptoDetails id={selectedCryptoId} />}
+      </Modal>
     </div>
   );
 };
