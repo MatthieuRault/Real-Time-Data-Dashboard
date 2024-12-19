@@ -33,18 +33,9 @@ export const CryptoList: FC = () => {
   }, []);
 
   const handleCryptoClick = (id: string) => {
-    console.log("Clicked on crypto with id:", id); // Log ici
     setSelectedCryptoId(id);
     setIsModalOpen(true);
   };
-
-  useEffect(() => {
-    console.log("Updated selectedCryptoId:", selectedCryptoId); // Log de l'état
-  }, [selectedCryptoId]);
-
-  useEffect(() => {
-    console.log("isModalOpen:", isModalOpen); // Log pour l'ouverture de la modale
-  }, [isModalOpen]);
 
   if (loading) return <p>Chargement des cryptomonnaies...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
