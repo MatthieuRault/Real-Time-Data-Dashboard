@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { getWeatherByCity } from "../services/weatherService";
+import { WeatherData } from "../types/weather.d";
 
-const WeatherWidget = () => {
-  const [weatherData, setWeatherData] = useState(null);
-  const [city, setCity] = useState("");
-  const [error, setError] = useState(null);
+export const WeatherWidget: FC = () => {
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [city, setCity] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   const fetchWeatherData = async () => {
     if (!city.trim()) {
@@ -26,7 +27,7 @@ const WeatherWidget = () => {
     }
   };
 
-  const handleCityChange = (e) => {
+  const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCity(e.target.value);
   };
 

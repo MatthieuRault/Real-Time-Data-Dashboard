@@ -1,9 +1,10 @@
 import axios from "axios";
-import { API_CONFIG } from "../config/api.config.ts";
+import { API_CONFIG } from "../config/api.config";
+import { WeatherData } from "../types/weather";
 
-export const getWeatherByCity = async (city) => {
+export const getWeatherByCity = async (city: string): Promise<WeatherData> => {
   try {
-    const response = await axios.get(
+    const response = await axios.get<WeatherData>(
       `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.WEATHER}/${city}`
     );
     return response.data;

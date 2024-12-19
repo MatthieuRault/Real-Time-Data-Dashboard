@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
+import { CryptoDetailsProps } from "../types/props.d";
+import { CryptoDetails as ICryptoDetails } from "../types/crypto.d";
 import { getCryptoById } from "../services/cryptoService";
 
-const CryptoDetails = ({ id }) => {
-  const [crypto, setCrypto] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+export const CryptoDetails: FC<CryptoDetailsProps> = ({ id }) => {
+  const [crypto, setCrypto] = useState<ICryptoDetails | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -13,7 +15,11 @@ const CryptoDetails = ({ id }) => {
         const data = await getCryptoById(id);
         setCrypto(data);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       } finally {
         setLoading(false);
       }

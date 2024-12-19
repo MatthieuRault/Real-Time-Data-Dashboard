@@ -1,4 +1,6 @@
-const CryptoCard = ({ crypto, onClick }) => (
+import { CryptoCardProps } from "../types/props.d";
+
+const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick }) => (
   <div
     className="border p-4 rounded cursor-pointer hover:bg-gray-50"
     onClick={onClick}

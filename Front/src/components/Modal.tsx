@@ -1,4 +1,7 @@
-const Modal = ({ isOpen, onClose, children }) => {
+import React from "react";
+import { ModalProps } from "../types/props.d";
+
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
