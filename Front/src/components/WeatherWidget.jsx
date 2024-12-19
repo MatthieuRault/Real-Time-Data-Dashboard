@@ -1,54 +1,85 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getWeatherByCity } from "../services/weatherService";
 
 const WeatherWidget = () => {
   const [weatherData, setWeatherData] = useState(null);
-  const [city, setCity] = useState("Paris");
+  const [city, setCity] = useState("");
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchWeatherData = async () => {
-      try {
-        const data = await getWeatherByCity(city);
-        setWeatherData(data);
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching weather data:", error);
-      }
-    };
-    fetchWeatherData();
-  }, [city]);
+  const fetchWeatherData = async () => {
+    if (!city.trim()) {
+      setWeatherData(null);
+      return;
+    }
+
+    try {
+      setError(null); // Réinitialiser l'erreur
+      const data = await getWeatherByCity(city);
+      setWeatherData(data);
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des données météo :",
+        error
+      );
+      setError("Impossible de récupérer les données météo pour cette ville.");
+      setWeatherData(null);
+    }
+  };
 
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };
 
-  if (!weatherData) {
-    return <div>Loading...</div>;
-  }
+  const handleSearch = () => {
+    fetchWeatherData();
+  };
 
   return (
     <div className="bg-white p-4 rounded-md shadow">
-      <h2 className="text-lg font-bold mb-2">Météo</h2>
       <div className="mb-4">
         <label htmlFor="city" className="block text-gray-700 font-bold mb-2">
-          Entrer un nom de ville :
+          Choisissez une ville :
         </label>
-        <input
-          type="text"
-          id="city"
-          className="border rounded px-2 py-1"
-          value={city}
-          onChange={handleCityChange}
-        />
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            id="city"
+            className="border rounded px-2 py-1 w-full"
+            placeholder="Entrez votre ville ici..."
+            value={city}
+            onChange={handleCityChange}
+          />
+          <button
+            onClick={handleSearch}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Rechercher
+          </button>
+        </div>
       </div>
-      <div>
-        <h3 className="text-lg font-bold mb-2">
-          Voici la météo actuelle à {city}
-        </h3>
-        <p className="text-gray-600">Temperature: {weatherData.main.temp}°C</p>
-        <p className="text-gray-600">Humidité: {weatherData.main.humidity}%</p>
-        <p className="text-gray-600">Vent: {weatherData.wind.speed} m/s</p>
-      </div>
+
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+
+      {weatherData ? (
+        <div>
+          <div className="mb-4">
+            <h3 className="text-lg font-bold">Température</h3>
+            <p className="text-gray-600">{weatherData.main.temp}°C</p>
+          </div>
+          <div className="mb-4">
+            <h3 className="text-lg font-bold">Humidité</h3>
+            <p className="text-gray-600">{weatherData.main.humidity}%</p>
+          </div>
+          <div>
+            <h3 className="text-lg font-bold">Vent</h3>
+            <p className="text-gray-600">{weatherData.wind.speed} m/s</p>
+          </div>
+        </div>
+      ) : city.trim() && !error ? (
+        <p className="text-gray-500">Chargement des données météo...</p>
+      ) : (
+        <p className="text-gray-500">Entrez une ville pour voir la météo.</p>
+      )}
     </div>
   );
 };
