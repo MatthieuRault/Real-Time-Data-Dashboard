@@ -6,7 +6,7 @@ export interface ApiInfo {
       path: string;
       description: string;
       methods: string[];
-      example: string; // Ajout du champ example
+      example?: string;
     };
   };
 }
@@ -20,7 +20,6 @@ export class AppService {
           path: '/api',
           description: "Endpoint pour obtenir les informations de toutes les routes de l'API",
           methods: ['GET'],
-          example: '/api',
         },
         weather: {
           path: '/api/weather/:city',
@@ -32,7 +31,6 @@ export class AppService {
           path: '/api/crypto',
           description: 'Endpoint pour obtenir les informations sur le top 10 des cryptomonnaies',
           methods: ['GET'],
-          example: '/api/crypto',
         },
         cryptoDetails: {
           path: '/api/crypto/:id',
@@ -42,9 +40,23 @@ export class AppService {
         },
         widgets: {
           path: '/api/widgets',
-          description: "Endpoint pour obtenir les informations sur l'ensemble des widgets",
-          methods: ['GET', 'POST', 'PUT', 'DELETE'],
-          example: '/api/widgets',
+          description: 'Endpoint pour gérer les widgets',
+          methods: ['GET', 'POST'],
+        },
+        widgetById: {
+          path: '/api/widgets/:id',
+          description: 'Endpoint pour gérer un widget spécifique avec son ID',
+          methods: ['PUT', 'DELETE'],
+        },
+        dashboards: {
+          path: '/api/dashboards',
+          description: 'Endpoint pour créer un nouveau dashboard',
+          methods: ['POST'],
+        },
+        dashboardByCode: {
+          path: '/api/dashboards/:code',
+          description: 'Endpoint pour récupérer un dashboard spécifique avec son code',
+          methods: ['GET'],
         },
       },
     };
