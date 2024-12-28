@@ -12,7 +12,7 @@ async function bootstrap() {
   };
 
   app.enableCors(corsOptions);
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api'); // Ajout du préfixe 'api' à toutes les routes
 
   await app.listen(process.env.PORT ?? 3000);
 }

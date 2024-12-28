@@ -16,6 +16,12 @@ export class AppService {
   getApiInfo(): ApiInfo {
     return {
       endpoints: {
+        api: {
+          path: '/api',
+          description: "Endpoint pour obtenir les informations de toutes les routes de l'API",
+          methods: ['GET'],
+          example: '/api',
+        },
         weather: {
           path: '/api/weather/:city',
           description: "Endpoint pour obtenir les informations météorologiques d'une ville donnée",
@@ -33,6 +39,12 @@ export class AppService {
           description: 'Endpoint pour obtenir les informations sur une crypto-monnaie spécifique',
           methods: ['GET'],
           example: '/api/crypto/bitcoin',
+        },
+        widgets: {
+          path: '/api/widgets',
+          description: "Endpoint pour obtenir les informations sur l'ensemble des widgets",
+          methods: ['GET', 'POST', 'PUT', 'DELETE'],
+          example: '/api/widgets',
         },
       },
     };
