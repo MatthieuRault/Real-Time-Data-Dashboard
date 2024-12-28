@@ -6,6 +6,7 @@ import { CryptoModule } from './modules/crypto/crypto.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { WidgetModule } from './modules/widgets/widget.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { WidgetModule } from './modules/widgets/widget.module';
     CryptoModule,
     WeatherModule,
     WidgetModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],

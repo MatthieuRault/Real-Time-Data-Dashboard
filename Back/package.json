@@ -30,7 +30,8 @@
     "dotenv": "^16.4.7",
     "mongoose": "^8.9.2",
     "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
@@ -40,6 +41,7 @@
     "@types/jest": "^29.5.2",
     "@types/node": "^22.10.2",
     "@types/supertest": "^6.0.0",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2",
     "eslint": "^9.17.0",
