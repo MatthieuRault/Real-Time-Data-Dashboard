@@ -8,5 +8,6 @@ import { WidgetController } from './widget.controller';
   imports: [MongooseModule.forFeature([{ name: 'Widget', schema: WidgetSchema }])],
   controllers: [WidgetController],
   providers: [WidgetService],
+  exports: [WidgetService],
 })
 export class WidgetModule {}

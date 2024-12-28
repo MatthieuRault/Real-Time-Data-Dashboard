@@ -16,6 +16,10 @@ export class WidgetService {
     return this.widgetModel.find().exec();
   }
 
+  async getWidgetsByDashboardId(dashboard_id: string): Promise<Widget[]> {
+    return this.widgetModel.find({ dashboard_id }).exec();
+  }
+
   async updateWidget(id: string, widget: Partial<Widget>): Promise<Widget> {
     return this.widgetModel.findByIdAndUpdate(id, widget, { new: true }).exec();
   }

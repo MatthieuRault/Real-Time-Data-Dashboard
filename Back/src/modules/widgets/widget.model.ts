@@ -1,18 +1,48 @@
-import { Document, Schema } from 'mongoose';
-
+import { Document, model, Schema } from 'mongoose';
 export interface Widget extends Document {
-  name: string;
-  type: 'weather' | 'crypto';
-  config: any;
-  position: { row: number; col: number }; // Position du widget dans le dashboard
+  positionX: number;
+  positionY: number;
+  category: string;
+  parameters: {
+    city?: string;
+    apiUrl: string;
+    name?: string;
+    type?: 'top' | 'single';
+  };
+  dashboard_id: string;
 }
 
 export const WidgetSchema = new Schema<Widget>({
-  name: { type: String, required: true }, // Nom du widget
-  type: { type: String, required: true }, // Type du widget (weather ou crypto)
-  config: { type: Object, required: true }, // Configuration spécifique au type
-  position: {
-    row: { type: Number, required: true },
-    col: { type: Number, required: true },
+  positionX: {
+    type: Number,
+    required: true,
+  },
+  positionY: {
+    type: Number,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  parameters: {
+    city: String,
+    apiUrl: {
+      type: String,
+      required: true,
+    },
+    name: String,
+    type: {
+      type: String,
+      enum: ['top', 'single'],
+    },
+  },
+  dashboard_id: {
+    type: String,
+    required: true,
   },
 });
+
+WidgetSchema.index({ dashboard_id: 1 });
+
+export const WidgetModel = model<Widget>('Widget', WidgetSchema);
