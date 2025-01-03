@@ -12,11 +12,12 @@ export class DashboardService {
     private widgetService: WidgetService,
   ) {}
 
-  async createDashboard(name: string): Promise<Dashboard> {
+  async createDashboard(name: string): Promise<{ code: string; name: string }> {
     // const code = Math.random().toString(36).substring(7);
     const code = uuidv4().substring(0, 6);
     const newDashboard = new this.dashboardModel({ name, code });
-    return newDashboard.save();
+    const savedDashboard = await newDashboard.save();
+    return { code: savedDashboard.code, name: savedDashboard.name };
   }
 
   async getDashboardByCode(code: string) {
