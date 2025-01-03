@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_CONFIG } from "../config/api.config.ts";
+import { API_CONFIG } from "./api.config.ts";
 import { Crypto, CryptoDetails } from "../types/crypto";
 
 export const getCryptoList = async (): Promise<Crypto[]> => {

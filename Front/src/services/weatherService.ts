@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_CONFIG } from "../config/api.config";
+import { API_CONFIG } from "./api.config";
 import { WeatherData } from "../types/weather";
 
 export const getWeatherByCity = async (city: string): Promise<WeatherData> => {

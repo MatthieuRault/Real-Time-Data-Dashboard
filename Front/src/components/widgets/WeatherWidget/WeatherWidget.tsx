@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
-import { getWeatherByCity } from "../services/weatherService";
-import { WeatherData } from "../types/weather.d";
+import { getWeatherByCity } from "../../../services/weatherService";
+import { WeatherData } from "../../../types/weather.d";
 
 export const WeatherWidget: FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);

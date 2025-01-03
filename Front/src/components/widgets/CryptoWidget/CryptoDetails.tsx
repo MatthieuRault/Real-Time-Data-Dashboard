@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
-import { CryptoDetailsProps } from "../types/props.d";
-import { CryptoDetails as ICryptoDetails } from "../types/crypto.d";
-import { getCryptoById } from "../services/cryptoService";
+import { CryptoDetailsProps } from "../../../types/props.d";
+import { CryptoDetails as ICryptoDetails } from "../../../types/crypto.d";
+import { getCryptoById } from "../../../services/cryptoService";
 
 export const CryptoDetails: FC<CryptoDetailsProps> = ({ id }) => {
   const [crypto, setCrypto] = useState<ICryptoDetails | null>(null);

@@ -1,9 +1,9 @@
 import { FC, useState, useEffect } from "react";
-import { getCryptoList } from "../services/cryptoService";
-import Modal from "./Modal";
+import { getCryptoList } from "../../../services/cryptoService";
+import Modal from "../../ui/Modal";
 import CryptoCard from "./CryptoCard";
 import CryptoDetails from "./CryptoDetails";
-import { Crypto } from "../types/crypto.d";
+import { Crypto } from "../../../types/crypto.d";
 
 export const CryptoList: FC = () => {
   const [cryptos, setCryptos] = useState<Crypto[]>([]);

@@ -1,4 +1,4 @@
-import { CryptoCardProps } from "../types/props.d";
+import { CryptoCardProps } from "../../../types/props.d";
 
 const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick }) => (
   <div

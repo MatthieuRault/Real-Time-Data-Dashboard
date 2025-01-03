@@ -3,5 +3,6 @@ export const API_CONFIG = {
   ENDPOINTS: {
     WEATHER: "/weather",
     CRYPTO: "/crypto",
+    DASHBOARDS: "/dashboards",
   },
 };
