@@ -4,8 +4,9 @@ import Modal from "../../ui/Modal";
 import CryptoCard from "./CryptoCard";
 import CryptoDetails from "./CryptoDetails";
 import { Crypto } from "../../../types/crypto.d";
+import { CryptoListProps } from "../../../types/props";
 
-export const CryptoList: FC = () => {
+export const CryptoList: FC<CryptoListProps> = () => {
   const [cryptos, setCryptos] = useState<Crypto[]>([]);
   const [selectedCryptoId, setSelectedCryptoId] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

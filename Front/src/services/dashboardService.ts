@@ -26,4 +26,16 @@ export const dashboardService = {
       throw error;
     }
   },
+
+  addWidgetToDashboard: async (dashboardId: string, widget: any) => {
+    try {
+      const response = await axios.post(`${API_CONFIG.BASE_URL}/widgets`, {
+        ...widget,
+        dashboard_id: dashboardId,
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
