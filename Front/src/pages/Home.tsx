@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { dashboardService } from "../services/dashboardService";
+import { useDarkMode } from "../context/DarkModeContext";
 
 const Home = () => {
   const [dashboardName, setDashboardName] = useState("");
   const [dashboardCode, setDashboardCode] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const { darkMode, toggleDarkMode } = useDarkMode();
   const navigate = useNavigate();
 
   // Création d'un nouveau dashboard
@@ -39,6 +41,14 @@ const Home = () => {
   return (
     <div className="min-h-screen flex flex-col items-center sm:justify-center">
       <div className="w-full max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-0 mt-4 sm:mt-0 space-y-6">
+        <div className="text-right">
+          <button
+            onClick={toggleDarkMode}
+            className="px-4 py-2 rounded-md  dark:bg-gray-700 dark:text-white"
+          >
+            {darkMode ? "☀️ Mode Clair" : "🌙 Dark Mode"}
+          </button>
+        </div>
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded text-sm">
             {error}
